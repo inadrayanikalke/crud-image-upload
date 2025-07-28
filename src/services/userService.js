@@ -17,8 +17,6 @@ async function getUsers(filter, options) {
 }
 
 async function getUserById(id) {
-  console.log("id", typeof id);
-
   return User.findById(id);
 }
 
@@ -32,20 +30,10 @@ async function updateUser(id, data) {
 }
 
 async function deleteUser(id) {
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    const err = new Error("Invalid user id");
-    err.status = 400;
-    throw err;
-  }
   return User.findByIdAndDelete(id);
 }
 
 async function setProfilePic(id, filename) {
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    const err = new Error("Invalid user id");
-    err.status = 400;
-    throw err;
-  }
   return User.findByIdAndUpdate(id, { profilePic: filename }, { new: true });
 }
 
